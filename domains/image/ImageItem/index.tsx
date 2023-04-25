@@ -9,9 +9,11 @@ interface IProps {
 
 const ImageItem: FC<IProps> = ({ description, src }) => {
   return (
-    <li className={styles.item}>
-      <img className={styles.image} style={{ backgroundImage: `url(${src})` }} alt={description} />
-    </li>
+    <div className={styles.container}>
+      <div className={styles.imageWrapper}>
+        <img className={styles.image} src={src} alt={description} />
+      </div>
+    </div>
   );
 };
 

@@ -1,17 +1,30 @@
 import { style } from '@vanilla-extract/css';
 
-export const item = style({
-  display: 'flex',
-  flexDirection: 'column',
-  width: '33%',
+export const container = style({
+  width: '20%',
   padding: '16px',
+  '@media': {
+    'screen and (max-width: 1024px)': {
+      width: '50%',
+    },
+    'screen and (max-width: 512px)': {
+      width: '100%',
+    },
+  },
+});
+
+export const imageWrapper = style({
+  position: 'relative',
+  paddingTop: '56.25%',
+  overflow: 'hidden',
 });
 
 export const image = style({
-  height: 0,
-  paddingBottom: '60%',
-  backgroundColor: 'lightgray',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center',
-  backgroundSize: 'cover',
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
+  maxWidth: '100%',
+  height: 'auto',
 });
