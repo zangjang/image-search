@@ -12,13 +12,12 @@ export default function Home() {
   const [query, setQuery] = useState('');
   const [sortType, setSortType] = useState<T_SORT_TYPE>(SORT_TYPE.ACCURACY);
   const queryClient = useQueryClient();
-  const { historyList, changeHistoryList } = useLocalStorage(IMAGE_HISTORY_STORAGE);
+  const { historyList, changeHistoryList, removeAllHistoryList } = useLocalStorage(IMAGE_HISTORY_STORAGE);
   const search = (query: string) => {
     queryClient.invalidateQueries([query, SORT_TYPE.ACCURACY]);
     setQuery(query);
     setSortType(SORT_TYPE.ACCURACY);
-    changeHistoryList;
-    query;
+    changeHistoryList(query);
   };
   const changeSortType = (sortType: T_SORT_TYPE) => () => {
     queryClient.invalidateQueries([query, sortType]);
@@ -28,7 +27,7 @@ export default function Home() {
   return (
     <>
       <header className={styles.header}>
-        <Search historyList={historyList} onSearch={search} />
+        <Search historyList={historyList} onSearch={search} onRemoveAllHistory={removeAllHistoryList} />
         <div className={styles.sortContainer}>
           <button
             className={styles.button[sortType === SORT_TYPE.ACCURACY ? 'select' : 'normal']}

@@ -7,6 +7,10 @@ export default function useLocalStorage(key: string) {
     setHistoryList(newHistoryList);
     localStorage.setItem(key, JSON.stringify(newHistoryList));
   };
+  const removeAllHistoryList = () => {
+    setHistoryList([]);
+    localStorage.removeItem(key);
+  };
 
   useEffect(() => {
     const historyListText = localStorage.getItem(key);
@@ -30,5 +34,6 @@ export default function useLocalStorage(key: string) {
   return {
     historyList,
     changeHistoryList,
+    removeAllHistoryList,
   };
 }
