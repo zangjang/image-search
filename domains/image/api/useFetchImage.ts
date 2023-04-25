@@ -1,7 +1,6 @@
-import axios from 'axios';
-
 import { SORT_TYPE } from '@domains/image/constants';
 import type { T_SORT_TYPE } from '@domains/image/types';
+import axios from '@libs/axios';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 interface I_IMAGE_META {
@@ -30,8 +29,7 @@ export default function useFetchImage(query: string, sortType: T_SORT_TYPE = SOR
   return useInfiniteQuery(
     [query, sortType],
     async ({ pageParam = 1 }) => {
-      const { data } = await axios.get<IResponse>('https://dapi.kakao.com/v2/search/image', {
-        headers: { Authorization: 'KakaoAK 8c507d9c4486cff701ddb2bd307fa0c0' },
+      const { data } = await axios.get<IResponse>('/v2/search/image', {
         params: { query, sort: sortType, page: pageParam, size: 10 },
       });
 

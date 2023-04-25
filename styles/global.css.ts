@@ -23,4 +23,4 @@ globalStyle('ol, ul, li', { listStyle: 'none' });
 globalStyle('table', { borderCollapse: 'collapse', borderSpacing: 0 });
 globalStyle('img', { maxWidth: '100%', height: 'auto', border: 0 });
 globalStyle('a', { display: 'inline-block' });
-globalStyle('button', { border: 0, background: 'transparent', cursor: 'pointer' });
+globalStyle('button', { border: 0, backgroundColor: 'transparent', cursor: 'pointer' });

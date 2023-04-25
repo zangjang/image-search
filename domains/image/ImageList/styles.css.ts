@@ -15,3 +15,16 @@ export const imageGroup = style({
   flexWrap: 'wrap',
   justifyContent: 'center',
 });
+
+export const imageItem = style({
+  width: '20%',
+  padding: '16px',
+  '@media': {
+    'screen and (max-width: 1024px)': {
+      width: '50%',
+    },
+    'screen and (max-width: 512px)': {
+      width: '100%',
+    },
+  },
+});

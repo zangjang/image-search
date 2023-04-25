@@ -18,6 +18,8 @@
     "paths": {
       "@components/*": ["components/*"],
       "@domains/*": ["domains/*"],
+      "@hooks/*": ["hooks/*"],
+      "@libs/*": ["libs/*"],
       "@styles/*": ["styles/*"]
     }
   },
