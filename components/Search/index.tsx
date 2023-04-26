@@ -19,6 +19,7 @@ const Search: FC<IProps> = ({ historyList = [], onSearch, onRemoveAllHistory = (
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSearch(query);
+    setFocus(false);
   };
   const focusInput = () => setFocus(true);
   const clickHistory = (history: string) => () => {

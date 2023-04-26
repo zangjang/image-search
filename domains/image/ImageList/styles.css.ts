@@ -14,7 +14,6 @@ export const imageList = style({
 export const imageGroup = style({
   display: 'flex',
   flexWrap: 'wrap',
-  justifyContent: 'center',
 });
 
 export const imageItem = style({
@@ -33,4 +32,9 @@ export const imageItem = style({
 
 export const imageText = style({
   marginTop: 5,
+});
+
+export const more = style({
+  width: '100%',
+  height: 20,
 });

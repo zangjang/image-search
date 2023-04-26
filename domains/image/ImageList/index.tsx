@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { type FC, useEffect, useRef } from 'react';
 
 import { Virtuoso } from 'react-virtuoso';
 
@@ -13,13 +13,28 @@ interface IProps {
 }
 
 const ImageList: FC<IProps> = ({ query, sortType }) => {
-  const { data: imageList, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchImage(query, sortType);
-  const loadMore = () => hasNextPage && !isFetchingNextPage && fetchNextPage();
+  const containerRef = useRef<HTMLDivElement>();
+  const { data: imageList, isFetching, fetchNextPage, hasNextPage } = useFetchImage(query, sortType);
+  const loadMore = () => hasNextPage && !isFetching && fetchNextPage();
+
+  useEffect(() => {
+    if (isFetching || !containerRef.current) {
+      return;
+    }
+
+    const { scrollHeight, scrollTop, clientHeight } = containerRef.current;
+
+    // 큰 화면에서 스크롤이 없을 때 화면 꽉채우기 위한 api 호출
+    if (scrollTop === scrollHeight - clientHeight) {
+      loadMore();
+    }
+  }, [isFetching]);
 
   return (
     <div className={styles.container}>
       {imageList && (
         <Virtuoso
+          scrollerRef={(e) => e instanceof HTMLDivElement && (containerRef.current = e)}
           className={styles.imageList}
           data={imageList.pages}
           endReached={loadMore}
@@ -33,6 +48,13 @@ const ImageList: FC<IProps> = ({ query, sortType }) => {
               ))}
             </div>
           )}
+          // onScroll={(e) => {
+          //   const { scrollHeight, scrollTop, clientHeight } = e.currentTarget;
+
+          //   if (scrollTop >= scrollHeight - clientHeight) {
+          //     loadMore();
+          //   }
+          // }}
         />
       )}
     </div>
