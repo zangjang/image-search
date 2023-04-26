@@ -1,6 +1,4 @@
-import Image from 'next/image';
-
-import type { FC } from 'react';
+import { type FC, useEffect, useRef, useState } from 'react';
 
 import * as styles from '@components/ImageItem/styles.css';
 
@@ -10,18 +8,28 @@ interface IProps {
 }
 
 const ImageItem: FC<IProps> = ({ alt = '', src }) => {
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [imgSrc, setImgSrc] = useState<string>('/images/placeholder.png');
+
+  useEffect(() => {
+    if (!imgRef.current) {
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0]?.isIntersecting) {
+        setImgSrc(src);
+        observer.disconnect();
+      }
+    });
+    observer.observe(imgRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className={styles.imageWrapper}>
-      <Image
-        src={src}
-        alt={alt}
-        blurDataURL="/images/placeholder.png"
-        placeholder="blur"
-        sizes="20%,
-          (max-width: 1024px) 50%,
-          (max-width: 512px) 100%"
-        fill
-      />
+      <img ref={imgRef} className={styles.image} src={imgSrc} alt={alt} />
     </div>
   );
 };

@@ -9,8 +9,10 @@ export default function useClickAway(
 ) {
   useEffect(() => {
     const handler = (event: Event) => {
-      const { current: el } = ref;
-      el && !el.contains(event.target as HTMLElement) && onClickAway(event);
+      if (event.target instanceof HTMLElement) {
+        const { current: el } = ref;
+        el && !el.contains(event.target) && onClickAway(event);
+      }
     };
 
     for (const eventName of events) {
