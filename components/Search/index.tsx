@@ -13,38 +13,38 @@ const Search: FC<IProps> = ({ historyList = [], onSearch, onRemoveAllHistory = (
   const inputWrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState('');
-  const [top, setTop] = useState(0);
-  const [focus, setFocus] = useState(false);
+  const [historyTopPosition, setHistoryTopPosition] = useState(0);
+  const [isFocus, setIsFocus] = useState(false);
   const changeQuery = (e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSearch(query);
-    setFocus(false);
+    setIsFocus(false);
   };
-  const focusInput = () => setFocus(true);
+  const focusInput = () => setIsFocus(true);
   const clickHistory = (history: string) => () => {
     onSearch(history);
     setQuery(history);
-    setFocus(false);
+    setIsFocus(false);
   };
   const removeAllHistory = () => {
     onRemoveAllHistory();
-    setFocus(false);
+    setIsFocus(false);
   };
   const filteredHistory = historyList.filter((item) => item.includes(query));
 
-  useClickAway(inputWrapperRef, () => setFocus(false));
+  useClickAway(inputWrapperRef, () => setIsFocus(false));
 
   useEffect(() => {
-    inputRef.current && setTop(inputRef.current.clientHeight);
+    inputRef.current && setHistoryTopPosition(inputRef.current.clientHeight);
   }, []);
 
   return (
     <form className={styles.container} onSubmit={submit}>
       <div ref={inputWrapperRef} className={styles.inputWrapper}>
         <input ref={inputRef} className={styles.input} value={query} onChange={changeQuery} onFocus={focusInput} />
-        {focus && filteredHistory.length > 0 && (
-          <div className={styles.history} style={{ top }}>
+        {isFocus && filteredHistory.length > 0 && (
+          <div className={styles.history} style={{ top: `${historyTopPosition}px` }}>
             <div className={styles.historyContent}>
               {filteredHistory.map((item, index) => (
                 <div className={styles.historyItem} key={index} onClick={clickHistory(item)}>

@@ -17,6 +17,7 @@ const ImageItem: FC<IProps> = ({ alt = '', src }) => {
     }
 
     const observer = new IntersectionObserver((entries) => {
+      // 현재 화면에 보여지면 src 세팅
       if (entries[0]?.isIntersecting) {
         setImgSrc(src);
         observer.disconnect();
