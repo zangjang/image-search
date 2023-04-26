@@ -14,13 +14,13 @@ export default function Home() {
   const queryClient = useQueryClient();
   const { historyList, changeHistoryList, removeAllHistoryList } = useLocalStorage(IMAGE_HISTORY_STORAGE);
   const search = (query: string) => {
-    queryClient.invalidateQueries([query, SORT_TYPE.ACCURACY]);
+    queryClient.removeQueries([query, SORT_TYPE.ACCURACY]);
     setQuery(query);
     setSortType(SORT_TYPE.ACCURACY);
     changeHistoryList(query);
   };
   const changeSortType = (sortType: T_SORT_TYPE) => () => {
-    queryClient.invalidateQueries([query, sortType]);
+    queryClient.removeQueries([query, sortType]);
     setSortType(sortType);
   };
 

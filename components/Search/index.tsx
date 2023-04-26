@@ -23,12 +23,14 @@ const Search: FC<IProps> = ({ historyList = [], onSearch, onRemoveAllHistory = (
   const focusInput = () => setFocus(true);
   const clickHistory = (history: string) => () => {
     onSearch(history);
+    setQuery(history);
     setFocus(false);
   };
   const removeAllHistory = () => {
     onRemoveAllHistory();
     setFocus(false);
   };
+  const filteredHistory = historyList.filter((item) => item.includes(query));
 
   useClickAway(inputWrapperRef, () => setFocus(false));
 
@@ -40,10 +42,10 @@ const Search: FC<IProps> = ({ historyList = [], onSearch, onRemoveAllHistory = (
     <form className={styles.container} onSubmit={submit}>
       <div ref={inputWrapperRef} className={styles.inputWrapper}>
         <input ref={inputRef} className={styles.input} value={query} onChange={changeQuery} onFocus={focusInput} />
-        {!query && focus && historyList.length > 0 && (
+        {focus && filteredHistory.length > 0 && (
           <div className={styles.history} style={{ top }}>
             <div className={styles.historyContent}>
-              {historyList.map((item, index) => (
+              {filteredHistory.map((item, index) => (
                 <div className={styles.historyItem} key={index} onClick={clickHistory(item)}>
                   {item}
                 </div>

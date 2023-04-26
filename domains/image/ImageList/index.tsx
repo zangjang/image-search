@@ -28,6 +28,7 @@ const ImageList: FC<IProps> = ({ query, sortType }) => {
               {page.documents.map(({ image_url, display_sitename }, index) => (
                 <div key={index} className={styles.imageItem}>
                   <ImageItem src={image_url} alt={display_sitename} />
+                  <div className={styles.imageText}>출처 : {display_sitename}</div>
                 </div>
               ))}
             </div>

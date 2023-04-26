@@ -29,7 +29,7 @@ const ImageItem: FC<IProps> = ({ alt = '', src }) => {
 
   return (
     <div className={styles.imageWrapper}>
-      <img ref={imgRef} className={styles.image} src={imgSrc} alt={alt} />
+      <img referrerPolicy="no-referrer" ref={imgRef} className={styles.image} src={imgSrc} alt={alt} />
     </div>
   );
 };

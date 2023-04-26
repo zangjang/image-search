@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 export default function useLocalStorage(key: string) {
   const [historyList, setHistoryList] = useState<string[]>([]);
   const changeHistoryList = (history: string) => {
-    const newHistoryList = [history, ...historyList];
+    const newHistoryList = [history, ...historyList.filter((item) => item !== history)];
     setHistoryList(newHistoryList);
     localStorage.setItem(key, JSON.stringify(newHistoryList));
   };

@@ -3,6 +3,7 @@ import { style } from '@vanilla-extract/css';
 export const container = style({
   height: 'calc(100vh - 80px)',
   display: 'flex',
+  padding: '0 16px',
 });
 
 export const imageList = style({
@@ -17,8 +18,9 @@ export const imageGroup = style({
 });
 
 export const imageItem = style({
+  border: '1px solid black',
   width: '20%',
-  padding: '16px',
+  padding: 16,
   '@media': {
     'screen and (max-width: 1024px)': {
       width: '50%',
@@ -27,4 +29,8 @@ export const imageItem = style({
       width: '100%',
     },
   },
+});
+
+export const imageText = style({
+  marginTop: 5,
 });
