@@ -48,6 +48,7 @@ const ImageList: FC<IProps> = ({ query, sortType }) => {
               ))}
             </div>
           )}
+          // 스크롤로 더 불러오기 처리
           // onScroll={(e) => {
           //   const { scrollHeight, scrollTop, clientHeight } = e.currentTarget;
 

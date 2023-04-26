@@ -26,6 +26,7 @@ interface IResponse {
 }
 
 export default function useFetchImage(query: string, sortType: T_SORT_TYPE = SORT_TYPE.ACCURACY) {
+  // 무한 스크롤을 위한 쿼리. 페이지 단위 처리 가능
   return useInfiniteQuery(
     [query, sortType],
     async ({ pageParam = 1 }) => {

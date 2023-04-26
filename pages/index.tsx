@@ -12,6 +12,7 @@ export default function Home() {
   const [query, setQuery] = useState('');
   const [sortType, setSortType] = useState<T_SORT_TYPE>(SORT_TYPE.ACCURACY);
   const queryClient = useQueryClient();
+  // 히스토리 저장을 위한 Hook
   const { historyList, changeHistoryList, removeAllHistoryList } = useLocalStorage(IMAGE_HISTORY_STORAGE);
   const search = (query: string) => {
     queryClient.removeQueries([query, SORT_TYPE.ACCURACY]);

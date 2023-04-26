@@ -1,3 +1,4 @@
+// import Image from 'next/image';
 import { type FC, useEffect, useRef, useState } from 'react';
 
 import * as styles from '@components/ImageItem/styles.css';
@@ -30,6 +31,17 @@ const ImageItem: FC<IProps> = ({ alt = '', src }) => {
 
   return (
     <div className={styles.imageWrapper}>
+      {/* Next Image를 사용. */}
+      {/* <Image
+        src={src}
+        alt={alt}
+        blurDataURL="/images/placeholder.png"
+        placeholder="blur"
+        sizes="20%,
+          (max-width: 1024px) 50%,
+          (max-width: 512px) 100%"
+        fill
+      /> */}
       <img referrerPolicy="no-referrer" ref={imgRef} className={styles.image} src={imgSrc} alt={alt} />
     </div>
   );

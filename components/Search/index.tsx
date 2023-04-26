@@ -16,23 +16,28 @@ const Search: FC<IProps> = ({ historyList = [], onSearch, onRemoveAllHistory = (
   const [historyTopPosition, setHistoryTopPosition] = useState(0);
   const [isFocus, setIsFocus] = useState(false);
   const changeQuery = (e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
+  // 검색
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSearch(query);
     setIsFocus(false);
   };
+  // 포커스 설정
   const focusInput = () => setIsFocus(true);
+  // 히스토리 클릭
   const clickHistory = (history: string) => () => {
     onSearch(history);
     setQuery(history);
     setIsFocus(false);
   };
+  // 히스토리 전체 삭제
   const removeAllHistory = () => {
     onRemoveAllHistory();
     setIsFocus(false);
   };
   const filteredHistory = historyList.filter((item) => item.includes(query));
 
+  // 히스토리 영역이 있을 때, 히스토리 영역 외를 클릭 했을 때에 대한 처리
   useClickAway(inputWrapperRef, () => setIsFocus(false));
 
   useEffect(() => {
